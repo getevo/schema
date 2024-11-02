@@ -1,16 +1,18 @@
 {
   "$schema": "https://github.com/getevo/schema/page-layout.json",
-  "url": ["/user/:user_id/overview","/user/:user_id"],
+  "url": [
+    "/user/:user_id/overview",
+    "/user/:user_id"
+  ],
   "workspace": "page",
-  "permission":"users.access",
+  "permission": "users.access",
   "layout": "two-columns",
   "title": "Edit User {{ context.give_name }} {{ context.family_name }}",
-
-
   "sections": {
-    "left": {
-      "component": "menu",
-      "elements":[
+    "left": [
+      {
+        "component": "menu",
+        "elements": [
           {
             "workspace": "menu",
             "component": "link",
@@ -29,185 +31,208 @@
             "href": "/user/:user_id/log",
             "permission": "user.access"
           }
-      ]
-    },
-    "right": {
-      "workspace": "page",
-      "component": "form",
-      "action": "/api/rest/user/{{ context.user_id }}",
-      "elements": [
-        {
-          "component": "tab",
-          "elements": [
-            {
-              "workspace": "tab",
-              "component": "tab-item",
-              "text": "Basic Information",
-              "icon": "fa-info",
-              "permission": "user.access",
-              "elements": [
-                {
-                  "component": "input:text",
-                  "attributes": {
-                    "name": "uuid",
-                    "label": "User Unique Identifier",
-                    "value": "{{ context.uuid }}",
-                    "disabled": true,
-                    "title": "This field is read-only"
+        ]
+      }
+    ],
+    "right": [
+      {
+        "workspace": "page",
+        "component": "form",
+        "action": "/api/rest/user/{{ context.user_id }}",
+        "elements": [
+          {
+            "component": "tab",
+            "elements": [
+              {
+                "workspace": "tab",
+                "component": "tab-item",
+                "text": "Basic Information",
+                "icon": "fa-info",
+                "permission": "user.access",
+                "elements": [
+                  {
+                    "component": "input:text",
+                    "attributes": {
+                      "name": "uuid",
+                      "label": "User Unique Identifier",
+                      "value": "{{ context.uuid }}",
+                      "disabled": true,
+                      "title": "This field is read-only"
+                    },
+                    "size": "1/2"
                   },
-                  "size": "1/2"
-                },
-                {
-                  "component": "input:text",
-                  "attributes": {
-                    "name": "given_name",
-                    "label": "Given Name",
-                    "value": "{{ context.given_name }}",
-                    "placeholder": "Enter given name",
-                    "validation": "required,name"
+                  {
+                    "component": "input:text",
+                    "attributes": {
+                      "name": "given_name",
+                      "label": "Given Name",
+                      "value": "{{ context.given_name }}",
+                      "placeholder": "Enter given name",
+                      "validation": "required,name"
+                    },
+                    "size": "1/2"
                   },
-                  "size": "1/2"
-                },
-                {
-                  "component": "input:text",
-                  "attributes": {
-                    "name": "family_name",
-                    "label": "Family Name",
-                    "value": "{{ context.family_name }}",
-                    "placeholder": "Enter family name",
-                    "validation": "required,name"
+                  {
+                    "component": "input:text",
+                    "attributes": {
+                      "name": "family_name",
+                      "label": "Family Name",
+                      "value": "{{ context.family_name }}",
+                      "placeholder": "Enter family name",
+                      "validation": "required,name"
+                    },
+                    "size": "1/2"
                   },
-                  "size": "1/2"
-                },
-                {
-                  "component": "spacer"
-                },
-                {
-                  "component": "input:text",
-                  "attributes": {
-                    "name": "email",
-                    "label": "Email",
-                    "value": "{{ context.email }}",
-                    "placeholder": "Enter email",
-                    "validation": "required,email"
+                  {
+                    "component": "spacer"
                   },
-                  "size": "1/2"
-                },
-                {
-                  "component": "filler",
-                  "size": "1/2"
-                },
-                {
-                  "component": "input:select",
-                  "source": "api",
-                  "api": "/api/rest/user_group/all",
-                  "map": {
-                    "iterator": "data",
-                    "value": "group_id",
-                    "text": "name"
+                  {
+                    "component": "input:text",
+                    "attributes": {
+                      "name": "email",
+                      "label": "Email",
+                      "value": "{{ context.email }}",
+                      "placeholder": "Enter email",
+                      "validation": "required,email"
+                    },
+                    "size": "1/2"
                   },
-                  "attributes": {
-                    "name": "group",
-                    "label": "User Group",
-                    "value": "{{ context.group }}",
-                    "placeholder": "Select user group",
-                    "validation": "required"
+                  {
+                    "component": "filler",
+                    "size": "1/2"
+                  },
+                  {
+                    "component": "input:select",
+                    "source": "api",
+                    "api": "/api/rest/user_group/all",
+                    "map": {
+                      "iterator": "data",
+                      "value": "group_id",
+                      "text": "name"
+                    },
+                    "attributes": {
+                      "name": "group",
+                      "label": "User Group",
+                      "value": "{{ context.group }}",
+                      "placeholder": "Select user group",
+                      "validation": "required"
+                    }
+                  },
+                  {
+                    "component": "input:select",
+                    "source": "api",
+                    "query": true,
+                    "api": "/api/rest/country/all?name=$input",
+                    "map": {
+                      "iterator": "data",
+                      "value": "iso_code",
+                      "text": "name"
+                    },
+                    "attributes": {
+                      "name": "country",
+                      "label": "User Country",
+                      "value": "{{ context.country }}",
+                      "placeholder": "Select user country"
+                    }
+                  },
+                  {
+                    "component": "input:select",
+                    "source": "static",
+                    "default": "Active",
+                    "data": [
+                      {
+                        "text": "Active",
+                        "value": "active"
+                      },
+                      {
+                        "text": "Inactive",
+                        "value": "inactive"
+                      }
+                    ],
+                    "attributes": {
+                      "name": "active",
+                      "label": "Is Active?",
+                      "value": "{{ context.is_active }}"
+                    }
+                  },
+                  {
+                    "component": "picker:image",
+                    "attributes": {
+                      "name": "profile_picture",
+                      "label": "Profile Picture",
+                      "value": "{{ context.profile_picture }}"
+                    },
+                    "aspect_ratio": "1x1"
+                  },
+                  {
+                    "component": "picker:entity",
+                    "entity": "user",
+                    "attributes": {
+                      "name": "friend_id",
+                      "label": "Friend",
+                      "value": "{{ context.friend_id }}"
+                    }
+                  },
+                  {
+                    "component": "input:datetime",
+                    "attributes": {
+                      "name": "created_at",
+                      "label": "Created At",
+                      "value": "{{ context.created_at }}"
+                    }
                   }
-                },
-                {
-                  "component": "input:select",
-                  "source": "api",
-                  "query": true,
-                  "api": "/api/rest/country/all?name=$input",
-                  "map": {
-                    "iterator": "data",
-                    "value": "iso_code",
-                    "text": "name"
+                ]
+              },
+              {
+                "workspace": "tab",
+                "component": "tab-item",
+                "text": "Credentials",
+                "icon": "fa-security",
+                "permission": "user.access",
+                "elements": [
+                  {
+                    "component": "input:password",
+                    "attributes": {
+                      "name": "password",
+                      "label": "Password",
+                      "placeholder": "Enter password",
+                      "validation": "password"
+                    },
+                    "size": "1"
                   },
-                  "attributes": {
-                    "name": "country",
-                    "label": "User Country",
-                    "value": "{{ context.country }}",
-                    "placeholder": "Select user country"
+                  {
+                    "component": "input:password",
+                    "attributes": {
+                      "name": "password_confirmation",
+                      "label": "Password Confirmation",
+                      "placeholder": "Enter password again",
+                      "validation": "password,equal:password"
+                    },
+                    "size": "1"
                   }
-                },
-                {
-                  "component": "input:select",
-                  "source": "static",
-                  "default": "Active",
-                  "data": [
-                    {"text": "Active", "value": "active"},
-                    {"text": "Inactive", "value": "inactive"}
-                  ],
-                  "attributes": {
-                    "name": "active",
-                    "label": "Is Active?",
-                    "value": "{{ context.is_active }}"
-                  }
-                },
-                {
-                  "component": "picker:image",
-                  "attributes": {
-                    "name": "profile_picture",
-                    "label": "Profile Picture",
-                    "value": "{{ context.profile_picture }}"
-                  },
-                  "aspect_ratio":"1x1"
-                },
-                {
-                  "component": "picker:entity",
-                  "entity": "user",
-                  "attributes": {
-                    "name": "friend_id",
-                    "label": "Friend",
-                    "value": "{{ context.friend_id }}"
-                  }
-                },
-                {
-                  "component": "input:datetime",
-                  "attributes": {
-                    "name": "created_at",
-                    "label": "Created At",
-                    "value": "{{ context.created_at }}"
-                  }
-                }
-              ]
-            },
-            {
-              "workspace": "tab",
-              "component": "tab-item",
-              "text": "Credentials",
-              "icon": "fa-security",
-              "permission": "user.access",
-              "elements": [
-                {
-                  "component": "input:password",
-                  "attributes": {
-                    "name": "password",
-                    "label": "Password",
-                    "placeholder": "Enter password",
-                    "validation": "password"
-                  },
-                  "size": "1"
-                },
-                {
-                  "component": "input:password",
-                  "attributes": {
-                    "name": "password_confirmation",
-                    "label": "Password Confirmation",
-                    "placeholder": "Enter password again",
-                    "validation": "password,equal:password"
-                  },
-                  "size": "1"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "component": "button",
+        "text": "Save",
+        "type": "submit",
+        "permission": "user.edit"
+      },
+      {
+        "component": "button",
+        "text": "Cancel",
+        "type": "href",
+        "href": "/user",
+        "permission": "user.access"
+      }
+    ]
   },
-
   "context": {
     "user_id": 1,
     "uuid": "user_uuid_text",
@@ -221,6 +246,4 @@
     "friend_id": 2,
     "created_at": "2022-01-01T12:00:00Z"
   }
-
-
 }

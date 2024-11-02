@@ -1,5 +1,4 @@
 {
-  "$schema": "https://github.com/getevo/schema/menu.json",
   "workspace": "navbar",
   "component": "menu",
   "elements":[

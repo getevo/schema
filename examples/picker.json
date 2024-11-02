@@ -1,0 +1,125 @@
+{
+  "$schema": "https://github.com/getevo/schema/picker.json",
+  "workspace": "page",
+  "component": "picker",
+  "api": "/api/rest/user/paginate",
+  "entity": "user",
+  "columns": [
+    {
+      "component":"text-image-row",
+      "label": "User",
+      "link": "/user/{{ row.user_id }}",
+      "title": "{{ row.given_name }} {{ row.family_name }}",
+      "image": "{{ row.profile_picture }}",
+      "show": true,
+      "order": {
+        "property": "given_name,family_name"
+      }
+    },
+    {
+      "component":"id-row",
+      "label": "ID",
+      "title": "{{ row.user_id }}",
+      "show": true,
+      "order": {
+        "property": "user_id"
+      }
+    },
+    {
+      "component":"text-row",
+      "label": "Email",
+      "link": "/user/{{ row.user_id }}",
+      "title": "{{ row.email }}",
+      "show": true,
+      "order": {
+        "property": "username"
+      }
+    },
+    {
+      "component":"text-row",
+      "label": "Group",
+      "title": "{{ row.Group.name }}",
+      "show": true
+    },
+    {
+      "component":"date-row",
+      "label": "Created At",
+      "title": "{{ row.created_at }}",
+      "show": false,
+      "order": {
+        "property": "created_at"
+      }
+    }
+  ],
+  "filters": [
+    {
+      "type": "text",
+      "name": "username",
+      "label": "Username",
+      "placeholder": "Search by username",
+      "operand": "like",
+      "autocomplete": {
+        "api": "/api/rest/user/all?limit=10&username=$input",
+        "map": {
+          "iteration": "data",
+          "value": "username",
+          "text": "username"
+        }
+      },
+      "show": true
+    },
+    {
+      "type": "text",
+      "name": "given_name",
+      "label": "Given Name",
+      "placeholder": "Search by given name",
+      "operand": "like",
+      "show": false
+    },
+    {
+      "type": "text",
+      "name": "family_name",
+      "label": "Family Name",
+      "placeholder": "Search by family name",
+      "operand": "like",
+      "show": false
+    },
+    {
+      "type": "select",
+      "name": "active",
+      "source": "static",
+      "label": "Active",
+      "operand": "eq",
+      "options": [
+        {
+            "text": "Yes",
+            "value": "active"
+        },
+        {
+          "text": "No",
+          "value": "inactive"
+        }
+      ],
+      "show": false
+    },
+    {
+      "type": "select",
+      "name": "country",
+      "label": "Country",
+      "source": "api",
+      "query": true,
+      "api": "/api/rest/country/all?name=$input",
+      "map": {
+        "iterator": "data",
+        "value": "iso_code",
+        "text": "name"
+      }
+    },
+    {
+      "type": "date-range",
+      "name": "registration_date",
+      "label": "Registration Date",
+      "show": "false"
+    }
+  ]
+}

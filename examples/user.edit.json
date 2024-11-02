@@ -34,6 +34,7 @@
     "right": {
       "workspace": "page",
       "component": "form",
+      "action": "/api/rest/user/{{ context.user_id }}",
       "elements": [
         {
           "component": "tab",
@@ -45,6 +46,17 @@
               "icon": "fa-info",
               "permission": "user.access",
               "elements": [
+                {
+                  "component": "input:text",
+                  "attributes": {
+                    "name": "uuid",
+                    "label": "User Unique Identifier",
+                    "value": "{{ context.uuid }}",
+                    "disabled": true,
+                    "title": "This field is read-only"
+                  },
+                  "size": "1/2"
+                },
                 {
                   "component": "input:text",
                   "attributes": {
@@ -150,6 +162,14 @@
                     "label": "Friend",
                     "value": "{{ context.friend_id }}"
                   }
+                },
+                {
+                  "component": "input:datetime",
+                  "attributes": {
+                    "name": "created_at",
+                    "label": "Created At",
+                    "value": "{{ context.created_at }}"
+                  }
                 }
               ]
             },
@@ -186,9 +206,21 @@
         }
       ]
     }
+  },
+
+  "context": {
+    "user_id": 1,
+    "uuid": "user_uuid_text",
+    "give_name": "John",
+    "family_name": "Doe",
+    "email": "john.doe@example.com",
+    "group": "1",
+    "country": "US",
+    "is_active": "active",
+    "profile_picture": "https://example.com/profile_picture.jpg",
+    "friend_id": 2,
+    "created_at": "2022-01-01T12:00:00Z"
   }
-
-
 
 
 }

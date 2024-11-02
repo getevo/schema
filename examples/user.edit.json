@@ -4,6 +4,7 @@
     "/user/:user_id/overview",
     "/user/:user_id"
   ],
+  "entity": "user",
   "workspace": "page",
   "permission": "users.access",
   "layout": "two-columns",

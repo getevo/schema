@@ -3,6 +3,7 @@
   "workspace": "page",
   "component": "picker",
   "api": "/api/rest/user/paginate",
+  "association": "Group",
   "entity": "user",
   "columns": [
     {

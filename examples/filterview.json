@@ -1,186 +1,221 @@
 {
-  "url":[
-    "/user/:user_id/overview",
-    "/user/:user_id"
+  "url": [
+    "/user"
   ],
-  "workspace":"page",
-  "permission":"users.access",
-  "layout":"one-column",
-  "title":"Users",
-  "sections":
-    {
-     "body": [
-         {
-         "$schema":"https://github.com/getevo/schema/filterview.json",
-         "workspace":"page",
-         "component":"filter-view",
-         "api":"/api/rest/user/paginate",
-         "association":"Group",
-         "post":{
-           "country":"/api/rest/country/all?iso_country[in]={{ concat(\"country\") }}"
-         },
-         "entity":"user",
-         "enforce":[
-           {
-             "property":"deleted",
-             "operand":"equals",
-             "value":"0"
-           }
-         ],
-         "columns":[
-           {
-             "component":"text-image-row",
-             "label":"User",
-             "link":"/user/{{ row.user_id }}",
-             "title":"{{ row.given_name }} {{ row.family_name }}",
-             "image":"{{ row.profile_picture }}",
-             "show":true,
-             "order":{
-               "property":"given_name,family_name"
-             }
-           },
-           {
-             "component":"id-row",
-             "label":"ID",
-             "title":"{{ row.user_id }}",
-             "show":true,
-             "order":{
-               "property":"user_id"
-             }
-           },
-           {
-             "component":"text-row",
-             "label":"Email",
-             "link":"/user/{{ row.user_id }}",
-             "title":"{{ row.email }}",
-             "show":true,
-             "order":{
-               "property":"username"
-             }
-           },
-           {
-             "component":"text-row",
-             "label":"Group",
-             "title":"{{ row.Group.name }}",
-             "show":true
-           },
-           {
-             "component":"date-row",
-             "label":"Created At",
-             "title":"{{ row.created_at }}",
-             "show":false,
-             "order":{
-               "property":"created_at"
-             }
-           },
-           {
-             "component":"select",
-             "label":"Deleted",
-             "source":"static",
-             "options":[
-               {
-                 "text":"All",
-                 "value":"-"
-               },
-               {
-                 "text":"Deleted",
-                 "value":"1"
-               },
-               {
-                 "text":"Not Deleted",
-                 "value":"0"
-               }
-             ],
-             "title":"{{ row.deleted === '1' ? 'Yes' : 'No' }}",
-             "show":false,
-             "order":{
-               "property":"deleted_at"
-             }
-           }
-         ],
-         "filters":[
-           {
-             "type":"text",
-             "name":"username",
-             "label":"Username",
-             "placeholder":"Search by username",
-             "operand":"contains",
-             "autocomplete":{
-               "api":"/api/rest/user/all?limit=10&username=$input",
-               "map":{
-                 "iteration":"data",
-                 "value":"username",
-                 "text":"username"
-               }
-             },
-             "show":true
-           },
-           {
-             "type":"text",
-             "name":"given_name",
-             "label":"Given Name",
-             "placeholder":"Search by given name",
-             "operand":"contains",
-             "show":false
-           },
-           {
-             "type":"text",
-             "name":"family_name",
-             "label":"Family Name",
-             "placeholder":"Search by family name",
-             "operand":"contains",
-             "show":false
-           },
-           {
-             "type":"select",
-             "name":"active",
-             "source":"static",
-             "label":"Active",
-             "operand":"eq",
-             "options":[
-               {
-                 "text":"Yes",
-                 "value":"active"
-               },
-               {
-                 "text":"No",
-                 "value":"inactive"
-               }
-             ],
-             "show":false
-           },
-           {
-             "type":"select",
-             "name":"country",
-             "label":"Country",
-             "source":"api",
-             "query":true,
-             "api":"/api/rest/country/all?name=$input",
-             "map":{
-               "iterator":"data",
-               "value":"iso_code",
-               "text":"name"
-             }
-           },
-           {
-             "type":"date-range",
-             "name":"registration_date",
-             "label":"Registration Date",
-             "show":true
-           }
-         ]
-       }
-     ],
-      "actions": [
-         {
-           "component":"button",
-           "label":"Add User",
-           "link":"/user/create",
-           "type":"button",
-           "icon":"fa-plus",
-           "permission":"users.create"
-         }
-      ]
-    }
-
+  "workspace": "page",
+  "permission": "users.access",
+  "layout": "one-column",
+  "title": "Users",
+  "sections": {
+    "body": [
+      {
+        "$schema": "https://github.com/getevo/schema/filterview.json",
+        "workspace": "page",
+        "component": "filter-view",
+        "api": "/api/rest/user/paginate",
+        "association": "Group",
+        "post": {
+          "country": "/api/rest/country/all?iso_country[in]={{ concat(\"country\") }}"
+        },
+        "entity": "user",
+        "enforce": [
+          {
+            "property": "deleted",
+            "operand": "equals",
+            "value": "0"
+          }
+        ],
+        "columns": [
+          {
+            "component": "text-image-row",
+            "label": "User",
+            "link": "/user/{{ row.user_id }}",
+            "title": "{{ row.given_name }} {{ row.family_name }}",
+            "image": "{{ row.profile_picture }}",
+            "show": true,
+            "order": {
+              "property": "given_name,family_name"
+            }
+          },
+          {
+            "component": "id-row",
+            "label": "ID",
+            "title": "{{ row.user_id }}",
+            "show": true,
+            "order": {
+              "property": "user_id"
+            }
+          },
+          {
+            "component": "text-row",
+            "label": "Email",
+            "link": "/user/{{ row.user_id }}",
+            "title": "{{ row.email }}",
+            "show": true,
+            "order": {
+              "property": "username"
+            }
+          },
+          {
+            "component": "text-row",
+            "label": "Group",
+            "title": "{{ row.Group.name }}",
+            "show": true
+          },
+          {
+            "component": "date-row",
+            "label": "Created At",
+            "title": "{{ row.created_at }}",
+            "show": false,
+            "order": {
+              "property": "created_at"
+            }
+          },
+          {
+            "component": "select",
+            "label": "Deleted",
+            "source": "static",
+            "options": [
+              {
+                "text": "All",
+                "value": "-"
+              },
+              {
+                "text": "Deleted",
+                "value": "1"
+              },
+              {
+                "text": "Not Deleted",
+                "value": "0"
+              }
+            ],
+            "title": "{{ row.deleted === '1' ? 'Yes' : 'No' }}",
+            "show": false,
+            "order": {
+              "property": "deleted_at"
+            }
+          }
+        ],
+        "filters": [
+          {
+            "type": "text",
+            "name": "username",
+            "label": "Username",
+            "placeholder": "Search by username",
+            "operand": "contains",
+            "autocomplete": {
+              "api": "/api/rest/user/all?limit=10&username=$input",
+              "map": {
+                "iteration": "data",
+                "value": "username",
+                "text": "username"
+              }
+            },
+            "show": true
+          },
+          {
+            "type": "text",
+            "name": "given_name",
+            "label": "Given Name",
+            "placeholder": "Search by given name",
+            "operand": "contains",
+            "show": false
+          },
+          {
+            "type": "text",
+            "name": "family_name",
+            "label": "Family Name",
+            "placeholder": "Search by family name",
+            "operand": "contains",
+            "show": false
+          },
+          {
+            "type": "select",
+            "name": "active",
+            "source": "static",
+            "label": "Active",
+            "operand": "eq",
+            "options": [
+              {
+                "text": "Yes",
+                "value": "active"
+              },
+              {
+                "text": "No",
+                "value": "inactive"
+              }
+            ],
+            "show": false
+          },
+          {
+            "type": "select",
+            "name": "country",
+            "label": "Country",
+            "source": "api",
+            "query": true,
+            "api": "/api/rest/country/all?name=$input",
+            "map": {
+              "iterator": "data",
+              "value": "iso_code",
+              "text": "name"
+            }
+          },
+          {
+            "type": "date-range",
+            "name": "registration_date",
+            "label": "Registration Date",
+            "show": true
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "component": "button",
+        "label": "Add User",
+        "link": "/user/create",
+        "type": "button",
+        "icon": "fa-plus",
+        "permission": "users.create"
+      }
+    ]
+  },
+  "context": {
+    "entity": "company",
+    "total": 176,
+    "offset": 0,
+    "total_pages": 1,
+    "current_page": 1,
+    "size": 176,
+    "data": [
+      {
+        "user_id": 1,
+        "uuid": "user_uuid_text",
+        "give_name": "John",
+        "family_name": "Doe",
+        "email": "john.doe@example.com",
+        "group": "1",
+        "country": "US",
+        "is_active": "active",
+        "profile_picture": "https://example.com/profile_picture.jpg",
+        "friend_id": 2,
+        "created_at": "2022-01-01T12:00:00Z"
+      },
+      {
+        "user_id": 2,
+        "uuid": "user_uuid_text",
+        "give_name": "John",
+        "family_name": "Doe",
+        "email": "john.doe@example.com",
+        "group": "1",
+        "country": "US",
+        "is_active": "active",
+        "profile_picture": "https://example.com/profile_picture.jpg",
+        "friend_id": 2,
+        "created_at": "2022-01-01T12:00:00Z"
+      }
+    ],
+    "success": true,
+    "error": ""
+  }
 }

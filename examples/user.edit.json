@@ -232,5 +232,18 @@
         "permission": "user.access"
       }
     ]
+  },
+  "context": {
+    "user_id": 1,
+    "uuid": "user_uuid_text",
+    "give_name": "John",
+    "family_name": "Doe",
+    "email": "john.doe@example.com",
+    "group": "1",
+    "country": "US",
+    "is_active": "active",
+    "profile_picture": "https://example.com/profile_picture.jpg",
+    "friend_id": 2,
+    "created_at": "2022-01-01T12:00:00Z"
   }
 }

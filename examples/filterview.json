@@ -1,9 +1,12 @@
 {
-  "$schema": "https://github.com/getevo/schema/picker.json",
+  "$schema": "https://github.com/getevo/schema/filterview.json",
   "workspace": "page",
-  "component": "picker",
+  "component": "filter-view",
   "api": "/api/rest/user/paginate",
   "association": "Group",
+  "post": {
+    "country": "/api/rest/country/all?iso_country[in]={{ concat(\"country\") }}"
+  },
   "entity": "user",
   "enforce": [
     {
@@ -12,13 +15,6 @@
       "value": "0"
     }
   ],
-  "picker": {
-    "component": "picker-with-picture",
-    "api": "/api/rest/user/:user_id",
-    "title": "{{ row.given_name }} {{ row.family_name }}",
-    "subtitle": "{{ row.email }}",
-    "image": "{{ row.profile_picture }}"
-  },
   "columns": [
     {
       "component":"text-image-row",
@@ -64,6 +60,30 @@
       "order": {
         "property": "created_at"
       }
+    },
+    {
+      "component":"select",
+      "label": "Deleted",
+      "source": "static",
+      "options": [
+        {
+          "text": "All",
+          "value": "-"
+        },
+        {
+          "text": "Deleted",
+          "value": "1"
+        },
+        {
+          "text": "Not Deleted",
+          "value": "0"
+        }
+      ],
+      "title": "{{ row.deleted === '1' ? 'Yes' : 'No' }}",
+      "show": false,
+      "order": {
+        "property": "deleted_at"
+      }
     }
   ],
   "filters": [
@@ -107,8 +127,8 @@
       "operand": "eq",
       "options": [
         {
-            "text": "Yes",
-            "value": "active"
+          "text": "Yes",
+          "value": "active"
         },
         {
           "text": "No",
@@ -134,7 +154,7 @@
       "type": "date-range",
       "name": "registration_date",
       "label": "Registration Date",
-      "show": false
+      "show": true
     }
   ]
 }

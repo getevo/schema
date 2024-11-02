@@ -132,6 +132,24 @@
                     "label": "Is Active?",
                     "value": "{{ context.is_active }}"
                   }
+                },
+                {
+                  "component": "picker:image",
+                  "attributes": {
+                    "name": "profile_picture",
+                    "label": "Profile Picture",
+                    "value": "{{ context.profile_picture }}"
+                  },
+                  "aspect_ratio":"1x1"
+                },
+                {
+                  "component": "picker:entity",
+                  "entity": "user",
+                  "attributes": {
+                    "name": "friend_id",
+                    "label": "Friend",
+                    "value": "{{ context.friend_id }}"
+                  }
                 }
               ]
             },

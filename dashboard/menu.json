@@ -1,0 +1,78 @@
+{
+  "$schema": "https://github.com/getevo/jstd/schema/menu.json",
+  "workspace": "navbar",
+  "elements":[
+    {
+      "component": "link",
+      "text": "Home",
+      "icon": "fa-home",
+      "type": "href",
+      "href": "/",
+      "layout": "home",
+      "elements": [],
+      "permission": "*"
+    },
+    {
+      "component": "spacer",
+      "elements": [],
+      "permission": "*"
+    },
+    {
+      "component": "link",
+      "text": "Media",
+      "icon": "fa-media",
+      "type": "menu-item",
+      "elements": [
+        {
+          "component": "link",
+          "text": "Images",
+          "icon": "fa-image",
+          "type": "href",
+          "layout": "media",
+          "href": "/media/images",
+          "permission": "media.access"
+        },
+        {
+          "component": "link",
+          "text": "Videos",
+          "icon": "fa-video",
+          "type": "href",
+          "layout": "media",
+          "href": "/media/videos",
+          "permission": "media.access"
+        }
+      ],
+      "permission": "media.access"
+    },
+    {
+      "component": "link",
+      "text": "Messages",
+      "icon": "fa-message",
+      "type": "href",
+      "badge": {
+        "component": "counter",
+        "value": 10,
+        "class": "warning"
+      },
+      "layout": "two-columns",
+      "href": "/message",
+      "elements": [],
+      "permission": "*"
+    },
+    {
+      "component": "link",
+      "text": "Disabled Link",
+      "icon": "fa-disabled",
+      "type": "href",
+      "disabled": true,
+      "href": "/message",
+      "elements": [],
+      "permission": "*"
+    },
+    {
+      "component": "spacer",
+      "elements": [],
+      "permission": "*"
+    }
+  ]
+}

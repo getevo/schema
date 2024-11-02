@@ -1,6 +1,7 @@
 {
-  "$schema": "https://github.com/getevo/jstd/schema/menu.json",
+  "$schema": "https://github.com/getevo/schema/menu.json",
   "workspace": "navbar",
+  "component": "menu",
   "elements":[
     {
       "component": "link",
@@ -8,7 +9,6 @@
       "icon": "fa-home",
       "type": "href",
       "href": "/",
-      "layout": "home",
       "elements": [],
       "permission": "*"
     },
@@ -22,14 +22,14 @@
       "text": "Media",
       "icon": "fa-media",
       "type": "menu-item",
+      "href": "/media",
       "elements": [
         {
           "component": "link",
           "text": "Images",
           "icon": "fa-image",
           "type": "href",
-          "layout": "media",
-          "href": "/media/images",
+          "href": "/media/images/",
           "permission": "media.access"
         },
         {
@@ -37,14 +37,14 @@
           "text": "Videos",
           "icon": "fa-video",
           "type": "href",
-          "layout": "media",
-          "href": "/media/videos",
+          "href": "/media/videos/",
           "permission": "media.access"
         }
       ],
       "permission": "media.access"
     },
     {
+      "hook": "users.messages",
       "component": "link",
       "text": "Messages",
       "icon": "fa-message",
@@ -54,7 +54,6 @@
         "value": 10,
         "class": "warning"
       },
-      "layout": "two-columns",
       "href": "/message",
       "elements": [],
       "permission": "*"
@@ -71,6 +70,44 @@
     },
     {
       "component": "spacer",
+      "elements": [],
+      "permission": "*"
+    },
+    {
+      "component": "external-link",
+      "text": "External Link",
+      "icon": "fa-google",
+      "type": "href",
+      "target": "_blank",
+      "href": "https://google.com",
+      "badge":{
+        "component": "icon",
+        "value": "fa-newtab"
+      },
+      "elements": [],
+      "permission": "*"
+    },
+    {
+      "component": "link",
+      "text": "Menu with html attributes",
+      "icon": "fa-link",
+      "type": "href",
+      "href": "/message",
+      "attributes": {
+        "title": "This is a link with a custom title",
+        "data-toggle": "tooltip",
+        "data-placement": "top"
+      },
+      "class": "my-custom-class",
+      "elements": [],
+      "permission": "*"
+    },
+    {
+      "component": "custom-page",
+      "text": "Link to custom page",
+      "icon": "fa-link",
+      "type": "href",
+      "href": "/custom-page",
       "elements": [],
       "permission": "*"
     }

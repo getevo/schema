@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/getevo/jstd/schema/menu.json",
+  "$schema": "https://raw.githubusercontent.com/getevo/jstd/refs/heads/v0.0.1/schema/menu.json",
   "workspace": "navbar",
   "elements":[
     {
